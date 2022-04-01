@@ -1,0 +1,51 @@
+apply plugin: 'com.huawei.ohos.hap'
+apply plugin: 'com.huawei.ohos.decctest'
+apply plugin: 'com.huawei.agconnect'
+//For instructions on signature configuration, see https://developer.harmonyos.com/cn/docs/documentation/doc-guides/ide_debug_device-0000001053822404#section1112183053510
+ohos {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\a84203565\\DevEcoStudioProjects\\EarthquakeSignature\\earthquakeprofile.p12')
+            storePassword '00000018201F6A750D83227C75D5E0340639182ADD278C77E46E84AF1A5134572F8F2F59476C9B91'
+            keyAlias = 'key'
+            keyPassword '000000180787F2B6E244A844BB4E4DD60B9892DCD9A378AA297813302903C95D671D53488ABC271D'
+            signAlg = 'SHA256withECDSA'
+            profile file('C:\\Users\\a84203565\\DevEcoStudioProjects\\EarthquakeSignature\\debugprofilierDebug.p7b')
+            certpath file('C:\\Users\\a84203565\\DevEcoStudioProjects\\EarthquakeSignature\\earthqaukeDebug.cer')
+        }
+    }
+    compileSdkVersion 7
+    defaultConfig {
+        compatibleSdkVersion 6
+    }
+    buildTypes {
+        release {
+            proguardOpt {
+                proguardEnabled false
+                rulesFiles 'proguard-rules.pro'
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.har'])
+    testImplementation 'junit:junit:4.13.1'
+    ohosTestImplementation 'com.huawei.ohos.testkit:runner:2.0.0.200'
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+
+    implementation 'com.huawei.agconnect:agconnect-core-harmony:1.2.1.300'
+    implementation 'com.huawei.hms:maps-harmony:6.4.0.300'
+    implementation 'com.huawei.hms:location-harmony:6.3.0.300'
+    implementation 'com.huawei.hms:push-ohos:5.2.0.305'
+
+    implementation 'com.airbnb.android:lottie:3.4.0'
+}
+decc {
+    supportType = ['html', 'xml']
+}

@@ -1,0 +1,80 @@
+{
+  "app": {
+    "bundleName": "com.huawei.earthquakenotifier",
+    "vendor": "huawei",
+    "version": {
+      "code": 1000000,
+      "name": "1.0.0"
+    }
+  },
+  "deviceConfig": {
+    "default": {
+      "network": {
+        "cleartextTraffic": true
+      }
+    }
+  },
+  "module": {
+    "package": "com.huawei.earthquakenotifier",
+    "name": ".MyApplication",
+    "allowClassMap": true,
+    "mainAbility": "com.huawei.earthquakenotifier.MainAbility",
+    "reqPermissions": [
+      {
+        "name": "ohos.permission.INTERNET",
+        "reason": "api"
+      },
+      {
+        "name": "ohos.permission.GET_NETWORK_INFO",
+        "reason": "map"
+      }
+    ],
+    "deviceType": [
+      "phone",
+      "tablet"
+    ],
+    "distro": {
+      "deliveryWithInstall": true,
+      "moduleName": "entry",
+      "moduleType": "entry",
+      "installationFree": false
+    },
+    "abilities": [
+      {
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ],
+        "orientation": "unspecified",
+        "visible": true,
+        "name": "com.huawei.earthquakenotifier.MainAbility",
+        "icon": "$media:icon",
+        "description": "$string:mainability_description",
+        "label": "$string:entry_MainAbility",
+        "type": "page",
+        "launchType": "standard"
+      },
+      {
+        "permissions": [
+          "com.huawei.agconnect.core.DataAbilityShellProvider.PROVIDER"
+        ],
+        "name": "com.huawei.agconnect.core.provider.AGConnectInitializeAbility",
+        "type": "data",
+        "uri": "dataability://com.huawei.earthquakenotifier.AGConnectInitializeAbility"
+      }
+    ],
+    "defPermissions": [
+      {
+        "name": "com.huawei.agconnect.core.DataAbilityShellProvider.PROVIDER",
+        "grantMode": "user_grant",
+        "availableScope": []
+      }
+    ]
+  }
+}

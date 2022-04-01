@@ -1,0 +1,66 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'com.huawei.ohos.app'
+
+//For instructions on signature configuration, see https://developer.harmonyos.com/cn/docs/documentation/doc-guides/ide_debug_device-0000001053822404#section1112183053510
+ohos {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\a84203565\\DevEcoStudioProjects\\EarthquakeSignature\\earthquakeprofile.p12')
+            storePassword '00000018E7D69E37C011676EEDF7B069638F8789CE2BCEC097619678F2822415E21412D15A8FAE6E'
+            keyAlias = 'key'
+            keyPassword '00000018B4F01D79A0EECDFF8343F101E7762DDC69C11211F310E8AF6F0AB20F20F6D03921DC81F4'
+            signAlg = 'SHA256withECDSA'
+            profile file('C:\\Users\\a84203565\\DevEcoStudioProjects\\EarthquakeSignature\\debugprofilierDebug.p7b')
+            certpath file('C:\\Users\\a84203565\\DevEcoStudioProjects\\EarthquakeSignature\\earthqaukeDebug.cer')
+        }
+    }
+    compileSdkVersion 7
+}
+
+buildscript {
+    repositories {
+        maven {
+            url 'http://repo.ark.tools.huawei.com/artifactory/maven-public/'
+            allowInsecureProtocol = true
+        }
+        maven {
+            url 'http://mirrors.tools.huawei.com/maven/'
+            allowInsecureProtocol = true
+        }
+        maven {
+            url 'https://repo.huaweicloud.com/repository/maven/'
+            allowInsecureProtocol = true
+        }
+        maven {
+            url 'https://developer.huawei.com/repo/'
+            allowInsecureProtocol = true
+        }
+    }
+    dependencies {
+        classpath 'com.huawei.ohos:hap:3.0.6.4'
+        classpath 'com.huawei.ohos:decctest:3.0.4.3'
+        classpath 'com.huawei.agconnect:agcp:1.6.0.300'
+        classpath 'com.huawei.agconnect:agcp-harmony:1.2.2.300'
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            url 'http://repo.ark.tools.huawei.com/artifactory/maven-public/'
+            allowInsecureProtocol = true
+        }
+        maven {
+            url 'http://mirrors.tools.huawei.com/maven/'
+            allowInsecureProtocol = true
+        }
+        maven {
+            url 'https://repo.huaweicloud.com/repository/maven/'
+            allowInsecureProtocol = true
+        }
+        maven {
+            url 'https://developer.huawei.com/repo/'
+            allowInsecureProtocol = true
+        }
+    }
+}

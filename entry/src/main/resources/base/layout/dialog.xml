@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DependentLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:id="$+id:custom_container"
+    ohos:height="match_content"
+    ohos:width="300vp"
+    ohos:padding="10vp"
+    ohos:background_element="#F5F5F5">
+
+    <DirectionalLayout
+        ohos:id="$+id:layout_mag"
+        ohos:height="match_content"
+        ohos:width="match_parent"
+        ohos:margin="10vp"
+        ohos:orientation="horizontal">
+        <Text
+            ohos:height="match_content"
+            ohos:width="match_content"
+            ohos:text_size="20fp"
+            ohos:text="Magnitude:"
+            ohos:horizontal_center="true"
+            ohos:clip_alignment="center"/>
+
+        <TextField
+            ohos:height="match_content"
+            ohos:width="0vp"
+            ohos:weight="0.5"
+            ohos:id="$+id:field_magnitude"
+            ohos:text_size="20fp"
+            ohos:left_margin="20vp"
+            ohos:horizontal_center="true"
+            ohos:clip_alignment="center"/>
+
+    </DirectionalLayout>
+
+    <DirectionalLayout
+        ohos:id="$+id:layout_distance"
+        ohos:height="match_content"
+        ohos:width="match_parent"
+        ohos:margin="10vp"
+        ohos:below="$id:layout_mag"
+        ohos:orientation="horizontal">
+        <Text
+            ohos:height="match_content"
+            ohos:width="match_content"
+            ohos:text_size="20fp"
+            ohos:text="Distance(KM):"
+            ohos:horizontal_center="true"
+            ohos:clip_alignment="center"/>
+
+        <TextField
+            ohos:height="match_content"
+            ohos:width="0vp"
+            ohos:weight="0.5"
+            ohos:left_margin="20vp"
+            ohos:id="$+id:field_distance"
+            ohos:text_size="20fp"
+            ohos:horizontal_center="true"
+            ohos:clip_alignment="center"/>
+
+    </DirectionalLayout>
+
+    <DirectionalLayout
+        ohos:below="$id:layout_distance"
+        ohos:height="match_content"
+
+        ohos:margin="10vp"
+        ohos:width="match_parent"
+        ohos:orientation="horizontal">
+
+        <Button
+            ohos:id="$+id:btn_dialog"
+            ohos:height="match_content"
+            ohos:width="0vp"
+            ohos:background_element="#FF9912"
+            ohos:margin="8vp"
+            ohos:padding="8vp"
+            ohos:weight="1"
+            ohos:text="Done"
+            ohos:text_color="#FFFFFF"
+            ohos:text_size="18vp"/>
+    </DirectionalLayout>
+
+</DependentLayout>

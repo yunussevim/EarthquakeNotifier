@@ -1,0 +1,37 @@
+{
+	"agcgw_all":{
+		"CN":"connect-drcn.dbankcloud.cn",
+		"CN_back":"connect-drcn.hispace.hicloud.com",
+		"DE":"connect-dre.dbankcloud.cn",
+		"DE_back":"connect-dre.hispace.hicloud.com",
+		"RU":"connect-drru.hispace.dbankcloud.ru",
+		"RU_back":"connect-drru.hispace.dbankcloud.ru",
+		"SG":"connect-dra.dbankcloud.cn",
+		"SG_back":"connect-dra.hispace.hicloud.com"
+	},
+	"client":{
+		"cp_id":"5190090000025027747",
+		"product_id":"99536292102127309",
+		"client_id":"858157817645780800",
+		"client_secret":"[!0040D91DA71C6E39069AE64E387F6F70C761B6147D2CBEAC17C7DDFD6385873F0DC80D0DC84A640444580310529FEB953345322CDFF698175FE60A5205BCFADB52178B160D078642E3CE1CE21F95DFA22FF4AC9BC1225230AE8A1316B7EC4FB190]",
+		"project_id":"99536292102127309",
+		"app_id":"105851089",
+		"api_key":"[!00293CBA068BF7B9D90BEE37F5B7D91567F44CEDB8F35A7A341CE5E8A13839E2AF4B04B1DA876805E311669FC450BAD0532A7B8CF7257C0B83D6AAC86CB287E304686F5B988E4FD0F6CE034AE4C5FEAF5CB9B0429160A44C9EA57EC08B471AF22C6AEDF8D83ED63818988F605FCBFB44BD6ED58F35B94F8777C66E8E3F989A7C74]",
+		"package_name":"com.huawei.earthquakenotifier"
+	},
+	"oauth_client":{
+		"client_id":"105851089",
+		"client_type":30
+	},
+	"app_info":{
+		"app_id":"858158315861977792",
+		"package_name":"com.huawei.earthquakenotifier"
+	},
+	"code":{
+		"code1":"92EEFE198A8099A9B965E6B68FAAABC1",
+		"code2":"4AA3D6A8DC47F1BA9BE7A7ACD30B4D1B",
+		"code3":"005BF7A994508C66A04E8D5E9ED1A549",
+		"code4":"D7E594623D4E683954AD89C820FD8AAE"
+	},
+	"configuration_version":"3.0"
+}
