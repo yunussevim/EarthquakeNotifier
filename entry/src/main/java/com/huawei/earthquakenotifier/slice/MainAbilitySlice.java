@@ -1,31 +1,26 @@
 package com.huawei.earthquakenotifier.slice;
 
+import com.huawei.earthquakenotifier.provider.EarthquakeApiProvider;
+import com.huawei.earthquakenotifier.provider.LocationProvider;
 import com.huawei.earthquakenotifier.MyApplication;
-import com.huawei.earthquakenotifier.api.APIClient;
-import com.huawei.earthquakenotifier.api.APIInterface;
-import com.huawei.earthquakenotifier.model.MultipleResource;
 import com.huawei.earthquakenotifier.ResourceTable;
-import com.huawei.hms.location.harmony.LocationRequest;
-import com.huawei.hms.location.harmony.LocationSettingsRequest;
-import com.huawei.hms.location.harmony.SettingsProviderClient;
+import com.huawei.hms.location.harmony.LocationAvailability;
+import com.huawei.hms.location.harmony.LocationCallback;
+import com.huawei.hms.location.harmony.LocationResult;
 import com.huawei.hms.maps.harmony.*;
 import com.huawei.hms.maps.harmony.model.*;
-import com.huawei.hms.push.common.ApiException;
-import com.huawei.hms.push.ohos.HmsInstanceId;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
-import ohos.agp.colors.RgbColor;
+import ohos.aafwk.content.Operation;
 import ohos.agp.components.*;
-import ohos.agp.components.element.ShapeElement;
 import ohos.agp.utils.Color;
-import ohos.agp.utils.Point;
 import ohos.agp.window.dialog.CommonDialog;
 import ohos.agp.window.dialog.ToastDialog;
+import ohos.app.dispatcher.TaskDispatcher;
+import ohos.app.dispatcher.task.TaskPriority;
 import ohos.hiviewdfx.HiLog;
 import ohos.hiviewdfx.HiLogLabel;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
 import java.util.List;
 
 import static ohos.agp.components.ComponentContainer.LayoutConfig.MATCH_CONTENT;
@@ -35,6 +30,9 @@ public class MainAbilitySlice extends AbilitySlice {
     private MapView mMapView;
     private HuaweiMap mHuaweiMap;
     private DirectionalLayout layout;
+    private LocationProvider locationProvider;
+    private Circle userLocationPoint;
+    private EarthquakeApiProvider earthquakeApiProvider;
 
     @Override
     public void onStart(Intent intent) {
@@ -44,25 +42,55 @@ public class MainAbilitySlice extends AbilitySlice {
         Button settings = findComponentById(ResourceTable.Id_settings);
         settings.setClickedListener(component -> {present(new SettingsSlice(), new Intent());});
         layout = findComponentById(ResourceTable.Id_mapLayout);
-        initTabs();
 
-        if(MyApplication.firtLaunch){
-            APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-            callretofit(apiInterface);
+        earthquakeApiProvider = new EarthquakeApiProvider();
+        earthquakeApiProvider.callApiRetrofit();
+
+        locationProvider = new LocationProvider(this);
+        LocationCallback locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult != null) {
+                    MyApplication.lon = locationResult.getLastLocation().getLongitude();
+                    MyApplication.lat = locationResult.getLastLocation().getLatitude();
+                    userLocationPoint.setCenter(new LatLng(MyApplication.lat,MyApplication.lon));
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(new LatLng(MyApplication.lat,MyApplication.lon));
+                    mHuaweiMap.moveCamera(cameraUpdate);
+                }
+            }
+            @Override
+            public void onLocationAvailability(LocationAvailability locationAvailability) {
+                super.onLocationAvailability(locationAvailability);
+                if (locationAvailability != null) {
+                    // Process the location status.
+                }
+            }
+        };
+
+        locationProvider.checkLocationSetting();
+
+        if(locationProvider.checkPermissions()){
+            locationProvider.requestPermission();
+        }
+
+        locationProvider.startLocationUpdate(5000L,locationCallback);
+
+        if(MyApplication.firstLaunch){
             showDialog();
-            MyApplication.firtLaunch = false;
+            MyApplication.firstLaunch = false;
         }
         else{
             showEarthquakes();
         }
         generateMap();
     }
+
     private void generateMap(){
         CommonContext.setContext(this);
         HuaweiMapOptions huaweiMapOptions = new HuaweiMapOptions();
 
         CameraPosition cameraPosition =
-                new CameraPosition(new LatLng(38.9637,35.2433), 10, 0, 0);
+                new CameraPosition(new LatLng(MyApplication.lat,MyApplication.lon), 10, 0, 0);
 
         huaweiMapOptions.camera(cameraPosition)
                 .zoomControlsEnabled(false)
@@ -84,25 +112,17 @@ public class MainAbilitySlice extends AbilitySlice {
                 mHuaweiMap.setOnMapClickListener(new OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng latLng) {
-                        new ToastDialog(CommonContext.getContext()).setText("onMapClick ").show();
                     }
                 });
-                Circle mCircle = new Circle(this);
-                if (null == mHuaweiMap) {
-                    return;
-                }
-                if (null != mCircle) {
-                    mCircle.remove();
-                    mCircle = null;
-                }
-                mCircle = mHuaweiMap.addCircle(new CircleOptions()
-                        .center(new LatLng(38.9637,35.2433))
+
+                userLocationPoint = mHuaweiMap.addCircle(new CircleOptions()
+                        .center(new LatLng(MyApplication.lat,MyApplication.lon))
                         .radius(1500)
                         .fillColor(Color.GREEN.getValue()));
                 int strokeColor = Color.RED.getValue();
                 float strokeWidth = 15.0f;
-                mCircle.setStrokeColor(strokeColor);
-                mCircle.setStrokeWidth(strokeWidth);
+                userLocationPoint.setStrokeColor(strokeColor);
+                userLocationPoint.setStrokeWidth(strokeWidth);
             }
         });
         ComponentContainer.LayoutConfig config = new ComponentContainer.LayoutConfig(ComponentContainer.LayoutConfig.MATCH_PARENT, ComponentContainer.LayoutConfig.MATCH_PARENT);
@@ -118,34 +138,6 @@ public class MainAbilitySlice extends AbilitySlice {
     @Override
     public void onForeground(Intent intent) {
         super.onForeground(intent);
-    }
-
-    private void callretofit(APIInterface apiInterface) {
-        Call<MultipleResource> call = apiInterface.doGetListResources();// map the Model class to the response we use:
-        call.enqueue(new Callback<MultipleResource>() {
-            @Override
-            public void onResponse(Call<MultipleResource> call, Response<MultipleResource> response) {
-                MultipleResource resource = response.body();
-                MyApplication.earthquakes = resource.features;
-            }
-
-            @Override
-            public void onFailure(Call<MultipleResource> call, Throwable t)
-            {
-                HiLog.debug(LABEL,t.getMessage());
-                call.cancel();
-            }
-        });
-    }
-
-    private void initTabs(){
-        Button homeButton = (Button) findComponentById(ResourceTable.Id_btn_home);
-        Button detectedButton = (Button) findComponentById(ResourceTable.Id_btn_detected);
-        Button settingsButton = (Button) findComponentById(ResourceTable.Id_btn_settings);
-
-        homeButton.setClickedListener(component -> {present(new MainAbilitySlice(), new Intent());});
-        detectedButton.setClickedListener(component -> {present(new DetectedSlice(), new Intent());});
-        settingsButton.setClickedListener(component -> {present(new SettingsSlice(), new Intent());});
     }
 
     private void showDialog(){
@@ -172,7 +164,7 @@ public class MainAbilitySlice extends AbilitySlice {
     private void showEarthquakes(){
         for(int i = 0; i< MyApplication.earthquakes.size();i++){
             List<Double> coordinates = MyApplication.earthquakes.get(i).geometry.coordinates;
-            int distance = calcDistance(38.9637,coordinates.get(1) ,35.2433 ,coordinates.get(0));
+            int distance = earthquakeApiProvider.calcDistance(MyApplication.lat,coordinates.get(1) ,MyApplication.lon ,coordinates.get(0));
             double mag = MyApplication.earthquakes.get(i).properties.mag;
             if(distance<=MyApplication.distance && mag>= MyApplication.magnitude){
                 Marker mMarker = null;
@@ -185,25 +177,10 @@ public class MainAbilitySlice extends AbilitySlice {
                 }
                 MarkerOptions options = new MarkerOptions()
                         .position(new LatLng(coordinates.get(1),coordinates.get(0)))
-                        .title(MyApplication.earthquakes.get(i).properties.title)
+                        .title(MyApplication.earthquakes.get(i).id)
                         .snippet(MyApplication.earthquakes.get(i).properties.place);
                 mMarker = mHuaweiMap.addMarker(options);
             }
         }
-    }
-
-    private int calcDistance(double lat1, double lat2, double lon1,double lon2) {
-
-        final int R = 6371; // Radius of the earth
-
-        double latDistance = Math.toRadians(lat2 - lat1);
-        double lonDistance = Math.toRadians(lon2 - lon1);
-        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        double distance = R * c;
-        HiLog.debug(LABEL,distance+"");
-        return (int)distance;
     }
 }

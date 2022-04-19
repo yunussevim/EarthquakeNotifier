@@ -27,6 +27,14 @@
       {
         "name": "ohos.permission.GET_NETWORK_INFO",
         "reason": "map"
+      },
+      {
+        "name": "ohos.permission.LOCATION",
+        "reason": "Allows applications to obtain location information when running in the foreground."
+      },
+      {
+        "name": "ohos.permission.LOCATION_IN_BACKGROUND",
+        "reason": "Allows applications to obtain location information when running in the background"
       }
     ],
     "deviceType": [
@@ -61,12 +69,34 @@
         "launchType": "standard"
       },
       {
+        "skills": [
+          {
+            "actions": [
+              "com.huawei.push.action.MESSAGING_EVENT"
+            ]
+          }
+        ],
+        "name": "com.huawei.earthquakenotifier.service.PushServiceAbility",
+        "icon": "$media:icon",
+        "description": "$string:pushserviceability_description",
+        "visible": false,
+        "type": "service",
+        "permissions": []
+      },
+      {
         "permissions": [
           "com.huawei.agconnect.core.DataAbilityShellProvider.PROVIDER"
         ],
         "name": "com.huawei.agconnect.core.provider.AGConnectInitializeAbility",
         "type": "data",
         "uri": "dataability://com.huawei.earthquakenotifier.AGConnectInitializeAbility"
+      },
+      {
+        "name": "com.huawei.earthquakenotifier.service.CheckEarthquakeServiceAbility",
+        "icon": "$media:icon",
+        "description": "$string:checkearthquakeserviceability_description",
+        "type": "service",
+        "visible": true
       }
     ],
     "defPermissions": [

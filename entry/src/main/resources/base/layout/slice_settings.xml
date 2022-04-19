@@ -20,10 +20,10 @@
         ohos:width="match_parent"
         ohos:orientation="vertical"
         ohos:padding="30vp"
+        ohos:top_margin="25vp"
         ohos:align_parent_top="true">
 
         <DirectionalLayout
-            ohos:visibility="hide"
             ohos:id="$+id:dl_notif"
             ohos:height="match_content"
             ohos:width="match_parent"
@@ -38,35 +38,11 @@
                 ohos:weight="0.8"
                 ohos:text_size="24fp"/>
             <Switch
+                ohos:id="$+id:switch_notifications"
                 ohos:weight="0.2"
                 ohos:height="match_content"
                 ohos:width="match_content"
                 ohos:layout_alignment="end"/>
-
-        </DirectionalLayout>
-
-        <DirectionalLayout
-            ohos:visibility="hide"
-            ohos:id="$+id:dl_raido_loc"
-            ohos:height="match_content"
-            ohos:width="match_parent"
-            ohos:background_element="$graphic:item_settings"
-            ohos:top_margin="25vp"
-            ohos:padding="20vp"
-            ohos:orientation="horizontal">
-            <Text
-                ohos:height="match_content"
-                ohos:weight="0.8"
-                ohos:width="match_content"
-                ohos:text="Use Location:"
-                ohos:text_size="24fp"
-                ohos:element_start="$id:dl_notif"/>
-            <Switch
-                ohos:weight="0.2"
-                ohos:height="match_content"
-                ohos:width="match_content"
-                ohos:layout_alignment="end"/>
-
 
         </DirectionalLayout>
 
@@ -121,102 +97,6 @@
 
         </DirectionalLayout>
 
-        <DirectionalLayout
-            ohos:visibility="hide"
-            ohos:height="match_content"
-            ohos:width="match_parent"
-            ohos:background_element="$graphic:item_settings"
-            ohos:top_margin="25vp"
-            ohos:padding="20vp"
-            ohos:orientation="horizontal">
-            <Text
-                ohos:height="match_content"
-                ohos:weight="0.8"
-                ohos:width="match_content"
-                ohos:text="Use Country:"
-                ohos:text_size="24fp"/>
-            <Switch
-                ohos:weight="0.2"
-                ohos:height="match_content"
-                ohos:width="match_content"
-                ohos:layout_alignment="end"/>
-
-
-        </DirectionalLayout>
-
-        <DirectionalLayout
-            ohos:visibility="hide"
-            ohos:height="match_content"
-            ohos:width="match_parent"
-            ohos:background_element="$graphic:item_settings"
-            ohos:top_margin="25vp"
-            ohos:padding="20vp"
-            ohos:orientation="horizontal">
-            <Text
-                ohos:weight="0.4"
-                ohos:text="Country:"
-                ohos:height="match_content"
-                ohos:width="match_content"
-
-                ohos:text_size="24fp"/>
-            <Text
-                ohos:height="match_content"
-                ohos:width="match_content"
-                ohos:text="Turkey"
-                ohos:weight="0.4"
-                ohos:text_size="20fp"/>
-            <Button
-                ohos:height="match_content"
-                ohos:width="match_content"
-                ohos:text="select"
-                ohos:text_color="#ff0000"
-                ohos:text_size="14fp"
-                ohos:weight="0.2"/>
-
-        </DirectionalLayout>
-
-    </DirectionalLayout>
-
-
-
-    <DirectionalLayout
-        ohos:visibility="hide"
-        ohos:id="$+id:tablist"
-        ohos:align_parent_bottom="true"
-        ohos:height="60vp"
-        ohos:width="match_parent"
-        ohos:alignment="bottom"
-        ohos:layout_alignment="center"
-        ohos:orientation="horizontal"
-        ohos:text_alignment="center"
-        >
-        <Button
-            ohos:id="$+id:btn_home"
-            ohos:height="60vp"
-            ohos:width="0"
-            ohos:weight="0.3"
-            ohos:text_size="24vp"
-            ohos:text_color="#ffffff"
-            ohos:background_element="#FF0000"
-            ohos:text="Home"/>
-        <Button
-            ohos:id="$+id:btn_detected"
-            ohos:height="60vp"
-            ohos:width="0"
-            ohos:text_color="#ffffff"
-            ohos:background_element="#FF0000"
-            ohos:text_size="24vp"
-            ohos:weight="0.3"
-            ohos:text="Detected"/>
-        <Button
-            ohos:id="$+id:btn_settings"
-            ohos:height="60vp"
-            ohos:text_color="#ffffff"
-            ohos:background_element="#FF5555"
-            ohos:text_size="24vp"
-            ohos:width="0"
-            ohos:weight="0.3"
-            ohos:text="Settings"/>
     </DirectionalLayout>
 
 </DependentLayout>

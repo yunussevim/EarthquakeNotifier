@@ -40,11 +40,10 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
     implementation 'com.huawei.agconnect:agconnect-core-harmony:1.2.1.300'
-    implementation 'com.huawei.hms:maps-harmony:6.4.0.300'
-    implementation 'com.huawei.hms:location-harmony:6.3.0.300'
-    implementation 'com.huawei.hms:push-ohos:5.2.0.305'
 
-    implementation 'com.airbnb.android:lottie:3.4.0'
+    implementation 'com.huawei.hms:maps-harmony:6.4.0.300'
+    implementation 'com.huawei.hms:push-ohos:5.2.0.305'
+    implementation 'com.huawei.hms:location-harmony:6.3.0.300'
 }
 decc {
     supportType = ['html', 'xml']
