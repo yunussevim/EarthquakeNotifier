@@ -11,13 +11,10 @@ import com.huawei.hms.maps.harmony.*;
 import com.huawei.hms.maps.harmony.model.*;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
-import ohos.aafwk.content.Operation;
 import ohos.agp.components.*;
 import ohos.agp.utils.Color;
 import ohos.agp.window.dialog.CommonDialog;
 import ohos.agp.window.dialog.ToastDialog;
-import ohos.app.dispatcher.TaskDispatcher;
-import ohos.app.dispatcher.task.TaskPriority;
 import ohos.hiviewdfx.HiLog;
 import ohos.hiviewdfx.HiLogLabel;
 

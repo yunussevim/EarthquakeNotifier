@@ -4,7 +4,6 @@ import com.huawei.earthquakenotifier.MyApplication;
 import com.huawei.earthquakenotifier.ResourceTable;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
-import ohos.aafwk.content.Operation;
 import ohos.agp.components.*;
 
 public class SettingsSlice extends AbilitySlice {

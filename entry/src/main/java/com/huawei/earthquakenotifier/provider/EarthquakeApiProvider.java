@@ -4,8 +4,6 @@ import com.huawei.earthquakenotifier.MyApplication;
 import com.huawei.earthquakenotifier.api.APIClient;
 import com.huawei.earthquakenotifier.api.APIInterface;
 import com.huawei.earthquakenotifier.model.MultipleResource;
-import ohos.hiviewdfx.HiLog;
-import ohos.hiviewdfx.HiLogLabel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

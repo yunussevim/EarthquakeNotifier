@@ -1,11 +1,8 @@
 package com.huawei.earthquakenotifier.service;
 
-import com.huawei.hms.push.common.ApiException;
-import com.huawei.hms.push.ohos.HmsInstanceId;
 import com.huawei.hms.push.ohos.HmsMessageService;
 import com.huawei.hms.push.ohos.ZBaseException;
 import com.huawei.hms.push.ohos.ZRemoteMessage;
-import ohos.aafwk.ability.Ability;
 import ohos.aafwk.content.Intent;
 import ohos.rpc.IRemoteObject;
 import ohos.hiviewdfx.HiLog;

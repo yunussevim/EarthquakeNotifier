@@ -7,8 +7,6 @@ import ohos.bundle.IBundleManager;
 import ohos.hiviewdfx.HiLog;
 import ohos.hiviewdfx.HiLogLabel;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class LocationProvider{
 
     private final HiLogLabel LABEL = new HiLogLabel(HiLog.LOG_APP, 0x00201, "MY_TAG");
