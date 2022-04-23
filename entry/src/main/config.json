@@ -90,13 +90,6 @@
         "name": "com.huawei.agconnect.core.provider.AGConnectInitializeAbility",
         "type": "data",
         "uri": "dataability://com.huawei.earthquakenotifier.AGConnectInitializeAbility"
-      },
-      {
-        "name": "com.huawei.earthquakenotifier.service.CheckEarthquakeServiceAbility",
-        "icon": "$media:icon",
-        "description": "$string:checkearthquakeserviceability_description",
-        "type": "service",
-        "visible": true
       }
     ],
     "defPermissions": [

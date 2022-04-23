@@ -65,7 +65,6 @@ public class MainAbilitySlice extends AbilitySlice {
         };
 
         locationProvider.checkLocationSetting();
-
         if(locationProvider.checkPermissions()){
             locationProvider.requestPermission();
         }
@@ -177,6 +176,7 @@ public class MainAbilitySlice extends AbilitySlice {
                         .title(MyApplication.earthquakes.get(i).id)
                         .snippet(MyApplication.earthquakes.get(i).properties.place);
                 mMarker = mHuaweiMap.addMarker(options);
+
             }
         }
     }

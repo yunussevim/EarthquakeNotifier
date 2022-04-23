@@ -24,8 +24,7 @@ public class NotificationSender {
         getPushToken();
     }
 
-    public void sendNotification(String title, String message) throws InterruptedException {
-        wait(5000L);
+    public void sendNotification(String title, String message){
         APIInterface apiInterface = APIClient.getPushClient().create(APIInterface.class);
         NotificationBody notificationMessage = new NotificationBody.Builder(
                 title, message, pushToken )
@@ -48,8 +47,8 @@ public class NotificationSender {
     private void callAuthRetrofit() {
         APIInterface authInterface = APIClient.getAuthClient().create(APIInterface.class);
         String grantType = "client_credentials";
-        int clientId = 105851089;
-        String clientSecret = "529519d208efe531dc0064b0adb77012a7b34c7a9d0be08a7b25a36238a8efd0";
+        int clientId = 0; // enter client id
+        String clientSecret = "enter client secret";
         Call<AccessToken> call = authInterface.getAccessToken(grantType,clientId,clientSecret);// map the Model class to the response we use:
         call.enqueue(new Callback<AccessToken>() {
             @Override
@@ -76,7 +75,7 @@ public class NotificationSender {
             public void run() {
                 try {
                     // Obtain the value of client/app_id from the agconnect-services.json file.
-                    String appId = "105851089";
+                    String appId = "enter App id";
                     // Set tokenScope to HCM.
                     String tokenScope = "HCM";
                     // Obtain a push token.
