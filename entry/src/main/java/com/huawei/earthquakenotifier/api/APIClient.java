@@ -14,11 +14,8 @@ public class APIClient {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             okHttpClient = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-            return okHttpClient;
         }
-        else {
-            return okHttpClient;
-        }
+        return okHttpClient;
     }
 
     public static Retrofit getClient() {
